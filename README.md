@@ -1,6 +1,6 @@
 ### Hi, I'm Harjoth 👋 
 
-A Full Stack JavaScript developer with experience building website and web applications. I have experience working with React, Redux, NodeJS, SQL Databases, and Git. Take a look at some of my [work](www.harjothk.com) and get in touch!
+A Full Stack JavaScript developer with experience building websites and web applications. I have experience working with React, Redux, NodeJS, SQL Databases, and Git. Take a look at some of my [work](https://www.harjothk.com/) and get in touch!
 
 <!--
 **harjothkhara/harjothkhara** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
