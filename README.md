@@ -2,7 +2,7 @@
 
 [![X @harjothk](https://img.shields.io/badge/X-@harjothk-000?style=flat&logo=x)](https://x.com/harjothk) [![LinkedIn](https://img.shields.io/badge/LinkedIn-harjoth-0A66C2?style=flat&logo=linkedin)](https://www.linkedin.com/in/harjoth/)
 
-☕ 👨🏽‍💻 🇬🇧 I like building software with amazing people and contributing to open source projects. ex SWE @clipboardhealth · MS&E @stanford
+☕ 👨🏽‍💻 🇬🇧 I like building software with amazing people and contributing to open source projects. ex SWE @clipboardhealth · MS&E @stanford @ecorner
 
 #### Contributing to
 
