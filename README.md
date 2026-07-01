@@ -16,4 +16,4 @@
 
 <br>
 
-![dino](https://user-images.githubusercontent.com/48686985/124527688-08ba9300-ddbb-11eb-96fe-4830604d69da.gif)
+<p align="center"><img src="https://user-images.githubusercontent.com/48686985/124527688-08ba9300-ddbb-11eb-96fe-4830604d69da.gif" width="500" alt="dino"></p>
