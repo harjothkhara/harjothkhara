@@ -5,19 +5,20 @@ Option B: your hand-written descriptions are never touched. This only rewrites t
 small marker span (`<!--m:owner/repo-->· N merged<!--/m-->`) that sits right after
 each project's star badge, and flips "in review" -> "N merged" once a PR lands.
 
-Repos with a manual tally (e.g. Go, which lands via Gerrit, not GitHub PRs) are left
-exactly as configured -- the script never queries or overwrites them.
+The tally is "shipped" = merged + landed (cherry-picked to main by a maintainer,
+closed rather than GitHub-merged but real credited work -- e.g. openclaw/openclaw#91536),
+sourced from the live PR/activity dashboard so this number never disagrees with it.
+Dashboard: https://harjoth-oss-contribution-workflow.pages.dev (unlisted Cloudflare
+Pages site backed by the private repo harjothkhara/Harjoth-OSS-Contribution-Workflow;
+data.js there is refreshed hourly during active hours and is the source of truth).
+This includes golang/go, whose Gerrit CLs (across go/x/tools/x/crypto) the dashboard
+already folds into a single "golang/go" bucket -- same mechanism as GitHub PRs here.
 
-For every other repo, the tally is "shipped" = merged + landed (cherry-picked to main
-by a maintainer, closed rather than GitHub-merged but real credited work -- e.g.
-openclaw/openclaw#91536), sourced from the live PR/activity dashboard so this number
-never disagrees with it. Dashboard: https://harjoth-oss-contribution-workflow.pages.dev
-(unlisted Cloudflare Pages site backed by the private repo
-harjothkhara/Harjoth-OSS-Contribution-Workflow; data.js there is refreshed hourly
-during active hours and is the source of truth for merged/landed state).
-
-Repos the dashboard doesn't track (e.g. garrytan/gbrain) fall back to a direct
-merged-PR-count query against the GitHub search API.
+If the dashboard is unreachable, dashboard-tracked repos are SKIPPED (left exactly as
+they were) rather than guessed at -- a GitHub PR search for golang/go would wrongly
+read 0 (Go doesn't use GitHub PRs), so falling back there would actively regress a repo
+that clearly has shipped work. Only repos the dashboard doesn't track at all (e.g.
+garrytan/gbrain) use a direct merged-PR-count query against the GitHub search API.
 
 Run in CI with GH_TOKEN set (built-in GITHUB_TOKEN is enough -- all data is public).
 """
@@ -31,7 +32,7 @@ DASHBOARD_DATA_URL = "https://harjoth-oss-contribution-workflow.pages.dev/data.j
 REPOS = [
     ("openclaw/openclaw", None),
     ("python/cpython", None),
-    ("golang/go", "landed via Gerrit → x/tools"),  # Go lands via Gerrit, not GitHub PRs
+    ("golang/go", None),
     ("NousResearch/hermes-agent", None),
     ("vllm-project/vllm", None),
     ("NVIDIA/NemoClaw", None),
@@ -83,10 +84,15 @@ def merged_count_via_github_search(repo):
     return int((out.stdout.strip() or "0"))
 
 
+SKIP = object()  # dashboard-tracked repo, but dashboard is unreachable -- leave bullet untouched
+
+
 def tally(repo, manual, dashboard_counts):
     if manual is not None:
         return manual
-    if dashboard_counts is not None and repo in dashboard_counts:
+    if repo in DASHBOARD_TRACKED_REPOS:
+        if dashboard_counts is None:
+            return SKIP  # don't guess via GitHub search -- e.g. golang/go would wrongly read 0
         n = dashboard_counts[repo]
     else:
         n = merged_count_via_github_search(repo)
@@ -128,7 +134,11 @@ def main():
     text = README.read_text()
     dashboard_counts = fetch_dashboard_shipped_counts()
     for repo, manual in REPOS:
-        text = apply(text, repo, tally(repo, manual, dashboard_counts))
+        val = tally(repo, manual, dashboard_counts)
+        if val is SKIP:
+            print(f"warn: skipping {repo} -- dashboard unreachable", file=sys.stderr)
+            continue
+        text = apply(text, repo, val)
     text = strip_dupe_inreview(text)
     README.write_text(text)
 
