@@ -1,0 +1,38 @@
+name: Update contributions
+
+# Refreshes the per-project "N merged" tally in README.md (Option B: descriptions stay
+# hand-written; only the marker spans update). Uses the built-in GITHUB_TOKEN — all data
+# is public, so no PAT/secret is needed. Commits only when a tally actually changed.
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"   # every 6h — merges are infrequent, so this is plenty
+  workflow_dispatch: {}      # manual "Run workflow" button
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-contributions
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Regenerate contribution tallies
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 .github/scripts/update-contributions.py
+      - name: Commit if changed
+        run: |
+          if ! git diff --quiet README.md; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add README.md
+            git commit -m "chore: refresh contribution tallies"
+            git push
+          else
+            echo "no tally changes"
+          fi
