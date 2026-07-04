@@ -107,17 +107,62 @@ def apply(text, repo, tally_str):
     if span.search(text):
         return span.sub(new, text)
     # Bootstrap: insert the marker right after this repo's star badge closing link.
-    si = text.find(f"img.shields.io/github/stars/{repo}")
-    if si == -1:
+    # Anchor on the shields badge image + repo link so it targets the *badge* link (not
+    # the title link) regardless of whether the badge is the live or static form.
+    m = re.search(rf"img\.shields\.io/[^)]*\)\]\(https://github\.com/{re.escape(repo)}\)", text)
+    if not m:
         print(f"warn: star badge for {repo} not found; skipping", file=sys.stderr)
         return text
-    link = f"](https://github.com/{repo})"
-    li = text.find(link, si)
-    if li == -1:
-        print(f"warn: badge link for {repo} not found; skipping", file=sys.stderr)
-        return text
-    ins = li + len(link)
+    ins = m.end()
     return text[:ins] + " " + new + text[ins:]
+
+
+def humanize_stars(n):
+    """Match shields' metric formatting: 73508 -> '74k', 381716 -> '382k', 1_250_000 -> '1.2M'."""
+    if n < 1000:
+        return str(n)
+    if n < 1_000_000:
+        return f"{round(n / 1000)}k"
+    return f"{n / 1_000_000:.1f}".rstrip("0").rstrip(".") + "M"
+
+
+def star_count(repo):
+    """Current stargazer count via the GitHub API, or None on any transient failure."""
+    out = subprocess.run(
+        ["gh", "api", f"repos/{repo}", "--jq", ".stargazers_count"],
+        capture_output=True, text=True,
+    )
+    if out.returncode != 0:
+        return None
+    try:
+        return int(out.stdout.strip())
+    except ValueError:
+        return None
+
+
+def refresh_star_badges(text):
+    """Rewrite each repo's star badge to a STATIC shields badge with the current count.
+
+    The badges used to be live `github/stars/<repo>` lookups, which make shields call the
+    GitHub API on every render. shields shares one GitHub token pool across all its users,
+    so it periodically gets rate-limited and returns a badge that reads "invalid" -- and
+    because GitHub's image proxy (Camo) caches whatever it got for the badge's cacheSeconds,
+    a single unlucky fetch freezes "invalid" on the profile for hours. Serving a static
+    `badge/stars-<count>-gold` badge (count refreshed here from the GitHub API, which this
+    job already has a token for) means shields never calls GitHub live, so it can never read
+    "invalid". On a fetch failure we leave the badge exactly as-is (keeps the last good count).
+    """
+    for repo, _ in REPOS:
+        n = star_count(repo)
+        if n is None:
+            print(f"warn: star count fetch failed for {repo}; leaving badge unchanged", file=sys.stderr)
+            continue
+        badge = f"https://img.shields.io/badge/stars-{humanize_stars(n)}-gold?style=flat"
+        pat = re.compile(rf"https://img\.shields\.io/[^)]*(\)\]\(https://github\.com/{re.escape(repo)}\))")
+        text, k = pat.subn(lambda m: badge + m.group(1), text, count=1)
+        if k == 0:
+            print(f"warn: star badge for {repo} not found; skipping", file=sys.stderr)
+    return text
 
 
 def strip_dupe_inreview(text):
@@ -140,6 +185,7 @@ def main():
             continue
         text = apply(text, repo, val)
     text = strip_dupe_inreview(text)
+    text = refresh_star_badges(text)
     README.write_text(text)
 
 
