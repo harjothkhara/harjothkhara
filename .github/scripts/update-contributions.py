@@ -36,6 +36,7 @@ REPOS = [
     ("NousResearch/hermes-agent", None),
     ("vllm-project/vllm", None),
     ("NVIDIA/NemoClaw", None),
+    ("steipete/CodexBar", None),
     ("garrytan/gbrain", None),  # not tracked by the dashboard -> GitHub search fallback
 ]
 
@@ -44,7 +45,7 @@ REPOS = [
 # this set falls back to the GitHub search query below -- e.g. garrytan/gbrain.
 DASHBOARD_TRACKED_REPOS = {
     "openclaw/openclaw", "python/cpython", "NousResearch/hermes-agent",
-    "golang/go", "vllm-project/vllm", "NVIDIA/NemoClaw",
+    "golang/go", "vllm-project/vllm", "NVIDIA/NemoClaw", "steipete/CodexBar",
 }
 
 
