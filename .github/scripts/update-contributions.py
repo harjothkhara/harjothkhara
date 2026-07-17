@@ -38,8 +38,7 @@ REPOS = [
     ("NVIDIA/NemoClaw", None),
     ("steipete/CodexBar", None),
     ("facebook/astryx", None),
-    # nodejs/node: tracked on the dashboard but has no profile bullet yet (0 shipped) — add it
-    # here once a node PR ships and it gets a bullet, else apply() warns about a missing badge.
+    ("nodejs/node", None),
     ("garrytan/gbrain", None),  # not tracked by the dashboard -> GitHub search fallback
 ]
 
