@@ -39,6 +39,7 @@ REPOS = [
     ("steipete/CodexBar", None),
     ("facebook/astryx", None),
     ("nodejs/node", None),
+    ("kubernetes/website", None),  # not tracked by the dashboard -> GitHub search fallback
     ("garrytan/gbrain", None),  # not tracked by the dashboard -> GitHub search fallback
 ]
 
