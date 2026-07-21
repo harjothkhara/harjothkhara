@@ -39,7 +39,7 @@ REPOS = [
     ("steipete/CodexBar", None),
     ("facebook/astryx", None),
     ("nodejs/node", None),
-    ("kubernetes/website", None),  # not tracked by the dashboard -> GitHub search fallback
+    ("kubernetes/website", None),
     ("garrytan/gbrain", None),  # not tracked by the dashboard -> GitHub search fallback
 ]
 
@@ -49,7 +49,7 @@ REPOS = [
 DASHBOARD_TRACKED_REPOS = {
     "openclaw/openclaw", "python/cpython", "NousResearch/hermes-agent",
     "golang/go", "vllm-project/vllm", "NVIDIA/NemoClaw", "steipete/CodexBar",
-    "nodejs/node", "facebook/astryx",
+    "nodejs/node", "facebook/astryx", "kubernetes/website",
 }
 
 
