@@ -16,8 +16,8 @@ already folds into a single "golang/go" bucket -- same mechanism as GitHub PRs h
 
 Which repos the dashboard tracks is read from its data.js `repos: [...]` array, not
 hardcoded -- the dashboard adds repos over time, and a hand-maintained copy drifts.
-Repos outside that array (e.g. garrytan/gbrain) use a direct merged-PR-count query
-against the GitHub search API.
+Repos outside that array use a direct merged-PR-count query against the GitHub
+search API.
 
 If the dashboard is unreachable or its repos[] can't be parsed, EVERY repo is SKIPPED
 (left exactly as it was) rather than guessed at. With the tracked set unknown there's no
@@ -45,7 +45,7 @@ REPOS = [
     ("facebook/astryx", None),
     ("nodejs/node", None),
     ("kubernetes/website", None),
-    ("garrytan/gbrain", None),  # not tracked by the dashboard -> GitHub search fallback
+    ("QwenLM/qwen-code", None),
 ]
 
 
