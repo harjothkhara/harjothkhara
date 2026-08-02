@@ -16,7 +16,7 @@
 - **[vLLM](https://github.com/vllm-project/vllm)** [![GitHub stars](https://img.shields.io/badge/stars-88k-gold?style=flat)](https://github.com/vllm-project/vllm) <!--m:vllm-project/vllm-->· 2 shipped<!--/m--><!--d:vllm-project/vllm:44431,49376--> - don't double-count local prefix-cache stats on scheduling retries, document NVFP4 GEMM kernel selection and the Marlin weight-only fallback
 - **[Node.js](https://github.com/nodejs/node)** [![GitHub stars](https://img.shields.io/badge/stars-119k-gold?style=flat)](https://github.com/nodejs/node) <!--m:nodejs/node-->· 1 shipped<!--/m--><!--d:nodejs/node:64404--> - load inspector network-tracking modules eagerly, enforce readonly state on open vfs handles, fix TLS session reuse with provided sockets, clarify PEM format for signing keys in docs
 - **[Kubernetes](https://github.com/kubernetes/website)** [![GitHub stars](https://img.shields.io/badge/stars-5k-gold?style=flat)](https://github.com/kubernetes/website) <!--m:kubernetes/website-->· 1 shipped<!--/m--><!--d:kubernetes/website:56537--> - clarify what setting .spec.os.name does in the Pod OS docs
-- **[Qwen Code](https://github.com/QwenLM/qwen-code)** [![GitHub stars](https://img.shields.io/badge/stars-26k-gold?style=flat)](https://github.com/QwenLM/qwen-code) <!--m:QwenLM/qwen-code-->· 1 shipped<!--/m--> <!--d:QwenLM/qwen-code:7203--> - fall back to the system ripgrep when the bundled binary cannot run
+- **[Qwen Code](https://github.com/QwenLM/qwen-code)** [![GitHub stars](https://img.shields.io/badge/stars-27k-gold?style=flat)](https://github.com/QwenLM/qwen-code) <!--m:QwenLM/qwen-code-->· 1 shipped<!--/m--> <!--d:QwenLM/qwen-code:7203--> - fall back to the system ripgrep when the bundled binary cannot run
 
 <br>
 
