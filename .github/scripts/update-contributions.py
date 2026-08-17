@@ -46,6 +46,7 @@ REPOS = [
     ("nodejs/node", None),
     ("kubernetes/website", None),
     ("QwenLM/qwen-code", None),
+    ("garrytan/gstack", None),
 ]
 
 
