@@ -47,6 +47,7 @@ REPOS = [
     ("kubernetes/website", None),
     ("QwenLM/qwen-code", None),
     ("garrytan/gstack", None),
+    ("paperclipai/paperclip", None),
 ]
 
 
