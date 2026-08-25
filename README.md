@@ -19,6 +19,7 @@
 - **[gstack](https://github.com/garrytan/gstack)** [![GitHub stars](https://img.shields.io/badge/stars-130k-gold?style=flat)](https://github.com/garrytan/gstack) <!--m:garrytan/gstack-->· 2 shipped<!--/m--><!--d:garrytan/gstack:1847,1851--> - recover a late-healthy browse daemon instead of reporting a failed start, look up branch review logs by the sanitized slug rather than the raw branch
 - **[Paperclip](https://github.com/paperclipai/paperclip)** [![GitHub stars](https://img.shields.io/badge/stars-79k-gold?style=flat)](https://github.com/paperclipai/paperclip) <!--m:paperclipai/paperclip-->· 1 shipped<!--/m--><!--d:paperclipai/paperclip:9237--> - surface real reasoning text from hermes reasoning.available events
 - **[Kubernetes](https://github.com/kubernetes/website)** [![GitHub stars](https://img.shields.io/badge/stars-5k-gold?style=flat)](https://github.com/kubernetes/website) <!--m:kubernetes/website-->· 1 shipped<!--/m--><!--d:kubernetes/website:56537--> - clarify what setting .spec.os.name does in the Pod OS docs
+- **[OpenBench](https://github.com/groq/openbench)** [![GitHub stars](https://img.shields.io/badge/stars-811-gold?style=flat)](https://github.com/groq/openbench)<!--d:groq/openbench:221--> - add missing docstrings and type hints in the cache CLI, scicode solver, and ARC parsing utils
 
 <br>
 

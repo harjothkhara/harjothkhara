@@ -48,6 +48,7 @@ REPOS = [
     ("QwenLM/qwen-code", None),
     ("garrytan/gstack", None),
     ("paperclipai/paperclip", None),
+    ("groq/openbench", None),  # not dashboard-tracked -> GitHub-search fallback
 ]
 
 
