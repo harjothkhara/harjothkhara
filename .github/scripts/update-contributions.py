@@ -47,6 +47,7 @@ REPOS = [
     ("kubernetes/website", None),
     ("QwenLM/qwen-code", None),
     ("garrytan/gstack", None),
+    ("garrytan/gbrain", None),
     ("paperclipai/paperclip", None),
     ("groq/openbench", None),  # not dashboard-tracked -> GitHub-search fallback
 ]
