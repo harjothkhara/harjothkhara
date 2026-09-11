@@ -4,6 +4,10 @@
 
 ☕ 👨🏽‍💻 🇬🇧 I like building software with amazing people and contributing to open source projects. ex SWE @clipboardhealth · MS&E @stanford @ecorner
 
+#### Security research
+
+- Credited reporter for two published, medium-severity OpenClaw webhook availability vulnerabilities (CVSS 5.3), fixed in `2026.8.1`: [Twilio pre-auth rate-limit denial of service](https://github.com/openclaw/openclaw/security/advisories/GHSA-xw48-j584-r73h) and [Synology pre-auth rate-limit denial of service](https://github.com/openclaw/openclaw/security/advisories/GHSA-fw6q-2frm-jxxr).
+
 #### Contributing to
 
 - **[OpenClaw](https://github.com/openclaw/openclaw)** [![GitHub stars](https://img.shields.io/badge/stars-389k-gold?style=flat)](https://github.com/openclaw/openclaw) <!--m:openclaw/openclaw-->· 60 shipped<!--/m--><!--d:openclaw/openclaw:92063,90122,96587,93502,93745,93439,93496,93055,93429,92575,90115,92051,90027,91536,92283,100098,100004,98771,98821,102276,104065,107294,108455,109440,103970,97059,103540,107800,107835,109555,112492,113984,97285,116565,116660,117181,117221,117132,117159,117268,117549,118460,120343,121811,118989,119008,119017,119022,119834,120005,118260,119825,122513,132170,114678,116302,119501,136498,143598--> - stop a session SQLite restore from installing an empty session index over a valid archive, preserve user behavior overrides across daily and idle session rollover, keep undici terminated exceptions non-fatal, stop canceled parallel tools from starting, keep heartbeat stalls from aborting healthy runs, stop a cron job's own marker from blocking its awaited wake, stop Codex /steer from hanging when the app-server never answers, stop a leading @ from retargeting file-tool destinations, restore the final answer when an earlier tool call failed · [all merged PRs →](https://github.com/openclaw/openclaw/pulls?q=is%3Apr+author%3Aharjothkhara+is%3Amerged) · also 5 issues reported, incl. a P1 data-loss bug ([#103363](https://github.com/openclaw/openclaw/issues/103363))
