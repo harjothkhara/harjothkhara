@@ -27,7 +27,7 @@ has shipped work. Skipping keeps the last good tallies until the next run.
 
 Run in CI with GH_TOKEN set (built-in GITHUB_TOKEN is enough -- all data is public).
 """
-import subprocess, re, sys, pathlib, urllib.request
+import json, subprocess, re, sys, pathlib, urllib.request
 
 README = pathlib.Path(__file__).resolve().parents[2] / "README.md"
 AUTHOR = "harjothkhara"
@@ -49,6 +49,7 @@ REPOS = [
     ("garrytan/gstack", None),
     ("garrytan/gbrain", None),
     ("paperclipai/paperclip", None),
+    ("opencv/opencv", None),  # opencv_extra PRs fold in via the dashboard companions map
     ("groq/openbench", None),  # not dashboard-tracked -> GitHub-search fallback
 ]
 
@@ -85,9 +86,19 @@ def fetch_dashboard():
     if not tracked:
         print("warn: could not read repos[] from dashboard payload; skipping all tallies this run", file=sys.stderr)
         return None
+    # Companion repos (e.g. opencv/opencv_extra -> opencv/opencv) hold a parent's test data, so
+    # their PRs pair with a parent PR. The dashboard lists them in `companions: {...}`, not repos[],
+    # and shows them on the parent's card; count them toward the parent here too, or the profile
+    # would read opencv as 1 shipped while the dashboard card says 2.
+    cm = re.search(r'^\s*companions:\s*(\{.*?\})\s*,\s*$', text, re.M)
+    try:
+        companions = json.loads(cm.group(1)) if cm else {}
+    except ValueError:
+        companions = {}
     counts = {repo: 0 for repo in tracked}
     for m in re.finditer(r'\{n:\d+, repo:"([^"]+)"[^}]*?state:"(merged|landed)"[^}]*\}', text):
         repo, state = m.group(1), m.group(2)
+        repo = companions.get(repo, repo)
         if repo in counts:
             counts[repo] += 1
     return tracked, counts
@@ -199,6 +210,30 @@ def strip_dupe_inreview(text):
     return "\n".join(lines)
 
 
+def sort_bullets(text):
+    """Order the "Contributing to" bullets by shipped count, highest first.
+
+    Ties keep their existing relative order (stable sort), so a brand-new repo appended at the
+    end lands last within its tie group. "in review" (0 shipped) sorts after every shipped repo.
+    This used to be left to a separate scheduled task, which stalls silently, so the order drifted
+    as counts moved (CodexBar at 16 sat below three 14s, Paperclip at 3 below two 2s). Sorting here,
+    in the job that writes the counts, means the order can never fall out of step with them.
+    Only one contiguous run of marked bullets is ever reordered, so nothing else can move.
+    """
+    lines = text.split("\n")
+    idx = [i for i, ln in enumerate(lines) if ln.startswith("- **[") and "<!--m:" in ln]
+    if len(idx) < 2:
+        return text
+    if idx != list(range(idx[0], idx[-1] + 1)):
+        print("warn: contribution bullets are not one contiguous block; leaving order as-is", file=sys.stderr)
+        return text
+    def shipped(ln):
+        m = re.search(r"<!--m:[^>]*-->\s*·\s*(\d+) shipped<!--/m-->", ln)
+        return int(m.group(1)) if m else 0
+    lines[idx[0]:idx[-1] + 1] = sorted((lines[i] for i in idx), key=lambda ln: -shipped(ln))
+    return "\n".join(lines)
+
+
 def main():
     text = README.read_text()
     dashboard = fetch_dashboard()
@@ -210,6 +245,7 @@ def main():
         text = apply(text, repo, val)
     text = strip_dupe_inreview(text)
     text = refresh_star_badges(text)
+    text = sort_bullets(text)
     README.write_text(text)
 
 
