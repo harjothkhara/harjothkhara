@@ -26,7 +26,7 @@
 - **[gstack](https://github.com/garrytan/gstack)** [![GitHub stars](https://img.shields.io/badge/stars-137k-gold?style=flat)](https://github.com/garrytan/gstack) <!--m:garrytan/gstack-->· 2 shipped<!--/m--><!--d:garrytan/gstack:1847,1851--> - recover a late-healthy browse daemon instead of reporting a failed start, look up branch review logs by the sanitized slug rather than the raw branch
 - **[Kubernetes](https://github.com/kubernetes/website)** [![GitHub stars](https://img.shields.io/badge/stars-5k-gold?style=flat)](https://github.com/kubernetes/website) <!--m:kubernetes/website-->· 1 shipped<!--/m--><!--d:kubernetes/website:56537--> - clarify what setting .spec.os.name does in the Pod OS docs
 - **[OpenBench](https://github.com/groq/openbench)** [![GitHub stars](https://img.shields.io/badge/stars-826-gold?style=flat)](https://github.com/groq/openbench) <!--m:groq/openbench-->· 1 shipped<!--/m--><!--d:groq/openbench:221--> - add missing docstrings and type hints in the cache CLI, scicode solver, and ARC parsing utils
-- **[Homebrew](https://github.com/Homebrew/homebrew-core)** [![GitHub stars](https://img.shields.io/badge/stars-15k-gold?style=flat)](https://github.com/Homebrew/homebrew-core) <!--m:Homebrew/homebrew-core-->· 1 shipped<!--/m--><!--d:Homebrew/homebrew-core:319615--> - rebuild the cocoapods formula for activesupport 7.2.4
+- **[Homebrew](https://github.com/Homebrew/homebrew-core)** [![GitHub stars](https://img.shields.io/badge/stars-16k-gold?style=flat)](https://github.com/Homebrew/homebrew-core) <!--m:Homebrew/homebrew-core-->· 1 shipped<!--/m--><!--d:Homebrew/homebrew-core:319615--> - rebuild the cocoapods formula for activesupport 7.2.4
 
 <br>
 
