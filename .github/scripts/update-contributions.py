@@ -51,6 +51,7 @@ REPOS = [
     ("paperclipai/paperclip", None),
     ("opencv/opencv", None),  # opencv_extra PRs fold in via the dashboard companions map
     ("groq/openbench", None),  # not dashboard-tracked -> GitHub-search fallback
+    ("Homebrew/homebrew-core", None),  # not dashboard-tracked -> GitHub-search fallback
 ]
 
 
