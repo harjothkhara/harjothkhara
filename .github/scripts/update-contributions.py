@@ -46,12 +46,12 @@ REPOS = [
     ("nodejs/node", None),
     ("kubernetes/website", None),
     ("QwenLM/qwen-code", None),
-    ("garrytan/gstack", None),
+    ("garrytan/gstack", "2 shipped"),  # frozen: no longer dashboard-tracked (stopped 2026-10-19); both landed via fix waves, so search would read 0
     ("garrytan/gbrain", None),
     ("paperclipai/paperclip", None),
     ("opencv/opencv", None),  # opencv_extra PRs fold in via the dashboard companions map
     ("groq/openbench", None),  # not dashboard-tracked -> GitHub-search fallback
-    ("Homebrew/homebrew-core", None),  # not dashboard-tracked -> GitHub-search fallback
+    ("Homebrew/homebrew-core", None),
 ]
 
 
