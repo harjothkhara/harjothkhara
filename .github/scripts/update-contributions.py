@@ -42,7 +42,7 @@ REPOS = [
     ("vllm-project/vllm", None),
     ("NVIDIA/NemoClaw", None),
     ("steipete/CodexBar", None),
-    ("facebook/astryx", None),
+    ("meta/astryx", None),
     ("nodejs/node", None),
     ("kubernetes/website", None),
     ("QwenLM/qwen-code", None),
