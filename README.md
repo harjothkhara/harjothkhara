@@ -4,6 +4,10 @@
 
 ☕ 👨🏽‍💻 🇬🇧 I like building software with amazing people and contributing to open source projects. ex SWE @clipboardhealth · MS&E @stanford @ecorner
 
+#### Support my open-source work
+
+I contribute bug fixes and tests to projects including OpenClaw, NemoClaw, CPython, and Go. [Sponsor my independent work on GitHub →](https://github.com/sponsors/harjothkhara)
+
 #### Security research
 
 - Credited reporter for two published, medium-severity OpenClaw webhook availability vulnerabilities (CVSS 5.3), fixed in `2026.8.1`: [Twilio pre-auth rate-limit denial of service](https://github.com/openclaw/openclaw/security/advisories/GHSA-xw48-j584-r73h) and [Synology pre-auth rate-limit denial of service](https://github.com/openclaw/openclaw/security/advisories/GHSA-fw6q-2frm-jxxr).
