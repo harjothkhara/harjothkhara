@@ -52,6 +52,7 @@ REPOS = [
     ("opencv/opencv", None),  # opencv_extra PRs fold in via the dashboard companions map
     ("groq/openbench", None),  # not dashboard-tracked -> GitHub-search fallback
     ("Homebrew/homebrew-core", None),
+    ("browserbase/stagehand", "1 shipped"),  # frozen: not dashboard-tracked; #3463 landed via maintainer mirror PR #3473 (2026-11-17), so search would read 0. Bump by hand when more ship
 ]
 
 
